@@ -111,5 +111,20 @@ class TestBTree(unittest.TestCase):
             else:
                 self.assertIsNone(special_btree.search(key))
 
+
+    def test_root_split_on_insert(self):
+        """Root should split when it becomes full on insertion."""
+        split_tree = BTree(2)
+        for key in [1, 2, 3, 4]:
+            split_tree.insert(key)
+
+        self.assertFalse(split_tree.root.is_leaf)
+        self.assertEqual(split_tree.root.keys, [2])
+
+        captured_output = StringIO()
+        with redirect_stdout(captured_output):
+            split_tree.traverse()
+        self.assertEqual(captured_output.getvalue().strip(), "1 2 3 4")
+
 if __name__ == '__main__':
     unittest.main()
