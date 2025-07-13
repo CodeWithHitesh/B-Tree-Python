@@ -13,6 +13,7 @@ Supports insertion, deletion, search, and in-order traversal.
 ## Requirements
 
 - Python 3.7 or higher
+- `min_degree` must be **at least 2** for a valid B-Tree
 
 ## Usage
 
