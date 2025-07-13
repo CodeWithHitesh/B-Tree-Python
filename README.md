@@ -50,6 +50,11 @@ python -m unittest test_btree.py
 - Deletion (leaf, internal, root, all keys, non-existent keys)
 - Edge cases: minimum degree 2, negative and large numbers, empty tree, single-key tree, duplicate keys
 
+## Continuous Integration
+
+Pull requests run a GitHub Actions workflow that executes `python -m unittest`.
+After the tests pass, the PR can be merged once it has been approved.
+
 ## License
 
 [MIT](LICENSE)
