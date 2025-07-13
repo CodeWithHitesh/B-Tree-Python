@@ -1,4 +1,5 @@
 import bisect
+from typing import Optional
 
 class BTreeNode:
     def __init__(self, min_degree: int, is_leaf: bool) -> None:
@@ -85,12 +86,12 @@ class BTreeNode:
                 print(self.keys[i], end=' ')
             self.children[len(self.keys)].traverse()  # Last child traversal
 
-    def search(self, key: int) -> "BTreeNode":
+    def search(self, key: int) -> Optional['BTreeNode']:
         """
         Search for a key in the subtree rooted at this node using binary search.
 
         :param key: The key to search for.
-        :return: The node containing the key, or None if not found.
+        :return: Optional[BTreeNode] The node containing the key, or None if not found.
         """
         if not self.keys:
             return None
@@ -290,12 +291,12 @@ class BTree:
         if self.root:
             self.root.traverse()
 
-    def search(self, key: int) -> "BTreeNode":
+    def search(self, key: int) -> Optional['BTreeNode']:
         """
         Search for a key in the B-Tree.
 
         :param key: The key to search for.
-        :return: The node containing the key, or None if not found.
+        :return: Optional[BTreeNode] The node containing the key, or None if not found.
         """
         if not self.root:
             return None
