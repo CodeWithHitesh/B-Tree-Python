@@ -190,7 +190,8 @@ class BTreeNode:
 
     def fill(self, idx: int) -> None:
         """
-        Ensure that the child node at idx has at least t keys.
+        Ensure that the child node at idx has at least ``min_degree`` keys.
+        ``min_degree`` represents the B-Tree order ``t``.
 
         :param idx: Index of the child to fill.
         :return: None
