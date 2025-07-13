@@ -1,5 +1,6 @@
 import unittest
 from io import StringIO
+from contextlib import redirect_stdout
 import sys
 from main import BTree
 
@@ -49,10 +50,16 @@ class TestBTree(unittest.TestCase):
 
     def test_delete_nonexistent_key(self):
         """Test deleting a key that does not exist (should not raise error)."""
+        captured_output = StringIO()
         try:
             self.btree.delete(999)
+            with redirect_stdout(captured_output):
+                self.btree.traverse()
         except Exception as e:
             self.fail(f"Deleting a non-existent key raised an exception: {e}")
+
+        result = captured_output.getvalue().strip()
+        self.assertEqual(result, "5 6 7 10 12 17 20 30")
 
     def test_minimum_degree_two(self):
         """Test BTree with minimum degree t=2."""
