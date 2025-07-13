@@ -241,11 +241,14 @@ class BTreeNode:
             self.merge(idx)
             self.children[idx].delete(key)
 
-    def delete(self, key: int) -> None:
+    def _delete_internal(self, key: int) -> None:
         """
-        Delete a key from the subtree rooted at this node.
+        Recursively delete ``key`` from the subtree rooted at this node.
 
-        :param key: The key to delete.
+        This helper is called by :meth:`delete` after verifying that the
+        key exists. It implements the core B-Tree deletion algorithm.
+
+        :param key: Key guaranteed to exist in this subtree.
         :return: None
         """
         idx = self.get_key_index(key)
@@ -255,22 +258,28 @@ class BTreeNode:
                 self.remove_from_leaf(idx)
             else:
                 self.remove_from_non_leaf(idx)
-        
+
         else:
-            if self.is_leaf:
-                return  # Key not found
-            
             flag = (idx == len(self.keys))
-            
+
             if len(self.children[idx].keys) < self.min_degree:
                 self.fill(idx)
-            
-            # If the last child was merged, it may have moved, so recurse accordingly
+
+            # If the last child was merged, it may have moved
             if flag and idx > len(self.keys):
-                self.children[idx - 1].delete(key)
-            
+                self.children[idx - 1]._delete_internal(key)
             else:
-                self.children[idx].delete(key)
+                self.children[idx]._delete_internal(key)
+
+    def delete(self, key: int) -> None:
+        """
+        Delete ``key`` from the subtree rooted at this node.
+
+        ``search`` is used up-front so calls on non-existent keys exit early.
+        """
+        if not self.search(key):
+            return
+        self._delete_internal(key)
 
 class BTree:
     def __init__(self, min_degree: int) -> None:
