@@ -277,8 +277,11 @@ class BTree:
         Initialize a B-Tree.
 
         :param min_degree: Minimum degree (defines the range for number of keys)
-        :return: None
+        :raises ValueError: If ``min_degree`` is less than 2.
         """
+        if min_degree < 2:
+            raise ValueError("min_degree must be at least 2")
+
         self.root = BTreeNode(min_degree, True)
         self.min_degree = min_degree
 

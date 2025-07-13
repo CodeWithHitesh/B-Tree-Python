@@ -75,6 +75,11 @@ class TestBTree(unittest.TestCase):
         self.assertTrue(btree_single.root.is_leaf)
         self.assertEqual(len(btree_single.root.keys), 0)
 
+    def test_invalid_min_degree(self):
+        """Creating a tree with invalid minimum degree should raise ``ValueError``."""
+        with self.assertRaises(ValueError):
+            BTree(1)
+
     def test_delete_from_empty_tree(self):
         """Test deleting from an empty tree (should not raise error)."""
         empty_btree = BTree(2)
