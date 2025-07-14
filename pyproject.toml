@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "btree"
+version = "0.1.0"
+description = "B-Tree Implementation in Python"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [{name = "Example"}]
+requires-python = ">=3.7"
+

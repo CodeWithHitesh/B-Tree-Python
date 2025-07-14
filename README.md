@@ -58,6 +58,8 @@ After the tests pass, the PR can be merged once it has been approved.
 Merged commits on `main` are scanned for Conventional Commit messages.
 A separate workflow uses a public GitHub Action to calculate the next semantic
 version and automatically push the corresponding `vX.Y.Z` tag.
+These tags then trigger another workflow that builds the package and
+publishes it to our private PyPI server automatically.
 
 ## License
 
