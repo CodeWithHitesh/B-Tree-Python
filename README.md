@@ -55,7 +55,7 @@ python -m unittest test_btree.py
 Pull requests run a GitHub Actions workflow that executes `python -m unittest`.
 After the tests pass, the PR can be merged once it has been approved.
 
-Merged commits on `main` are scanned for Conventional Commit messages.
+Merged commits on `master` are scanned for Conventional Commit messages.
 A separate workflow uses a public GitHub Action to calculate the next semantic
 version and automatically push the corresponding `vX.Y.Z` tag.
 
