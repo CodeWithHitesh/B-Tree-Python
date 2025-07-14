@@ -43,10 +43,18 @@ btree.traverse()
 print()
 ```
 
+## Demo
+
+Run the example script to see a B-Tree in action:
+
+```sh
+python examples/demo.py
+```
+
 ## Run Tests
 
 ```sh
-python -m unittest test_btree.py
+python -m unittest discover
 ```
 
 ## Test Coverage
