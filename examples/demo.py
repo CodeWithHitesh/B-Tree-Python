@@ -1,7 +1,6 @@
 from btree import BTree
 
-
-def demo() -> None:
+if __name__ == '__main__':
     t = BTree(3)
     print("=== B-Tree Demo ===\n")
 
@@ -22,7 +21,3 @@ def demo() -> None:
     print("Traversal after deletion:")
     t.traverse()
     print()
-
-
-if __name__ == '__main__':
-    demo()

@@ -15,10 +15,16 @@ Supports insertion, deletion, search, and in-order traversal.
 - Python 3.7 or higher
 - `min_degree` must be **at least 2** for a valid B-Tree
 
+## Installation
+
+```sh
+pip install btree
+```
+
 ## Usage
 
 ```python
-from main import BTree
+from btree import BTree
 
 btree = BTree(min_degree=3)
 for key in [10, 20, 5, 6, 12, 30, 7, 17]:
