@@ -2,7 +2,7 @@ import unittest
 from io import StringIO
 from contextlib import redirect_stdout
 import sys
-from main import BTree
+from btree import BTree
 
 class TestBTree(unittest.TestCase):
     """Unit tests for the BTree class."""
