@@ -64,6 +64,8 @@ After the tests pass, the PR can be merged once it has been approved.
 Merged commits on `master` are scanned for Conventional Commit messages.
 A separate workflow uses a public GitHub Action to calculate the next semantic
 version and automatically push the corresponding `vX.Y.Z` tag.
+Whenever a tag is created, another step builds the package and publishes it to
+the configured Artifactory PyPI repository.
 
 ## License
 

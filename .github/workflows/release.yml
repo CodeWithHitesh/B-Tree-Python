@@ -27,3 +27,23 @@ jobs:
           tag_prefix: v
       - name: Echo created tag
         run: echo "Created ${{ steps.tagger.outputs.new_tag }}"
+      - name: Set up Python
+        if: steps.tagger.outputs.new_tag != ''
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Install build dependencies
+        if: steps.tagger.outputs.new_tag != ''
+        run: |
+          python -m pip install --upgrade pip
+          pip install build twine
+      - name: Build package
+        if: steps.tagger.outputs.new_tag != ''
+        run: python -m build
+      - name: Publish to Artifactory
+        if: steps.tagger.outputs.new_tag != ''
+        env:
+          TWINE_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
+          TWINE_REPOSITORY_URL: ${{ secrets.ARTIFACTORY_URL }}
+        run: twine upload dist/*
