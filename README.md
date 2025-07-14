@@ -40,7 +40,7 @@ print()
 ## Run Tests
 
 ```sh
-python -m unittest test_btree.py
+python -m unittest discover
 ```
 
 ## Test Coverage
