@@ -231,16 +231,16 @@ class BTreeNode:
         if len(self.children[idx].keys) >= self.min_degree:
             pred = self.children[idx].get_predecessor()
             self.keys[idx] = pred
-            self.children[idx].delete(pred)
+            self.children[idx]._delete_internal(pred)
         
         elif len(self.children[idx + 1].keys) >= self.min_degree:
             succ = self.children[idx + 1].get_successor()
             self.keys[idx] = succ
-            self.children[idx + 1].delete(succ)
+            self.children[idx + 1]._delete_internal(succ)
         
         else:
             self.merge(idx)
-            self.children[idx].delete(key)
+            self.children[idx]._delete_internal(key)
 
     def _delete_internal(self, key: int) -> None:
         """
@@ -302,8 +302,7 @@ class BTree:
 
         :return: None
         """
-        if self.root:
-            self.root.traverse()
+        self.root.traverse()
 
     def search(self, key: int) -> Optional['BTreeNode']:
         """
@@ -312,7 +311,7 @@ class BTree:
         :param key: The key to search for.
         :return: Optional[BTreeNode] The node containing the key, or None if not found.
         """
-        if not self.root:
+        if not self.root.keys:
             return None
         return self.root.search(key)
 
@@ -327,10 +326,9 @@ class BTree:
             new_root = BTreeNode(self.min_degree, False)
             new_root.children.append(self.root)
             new_root.split_child(0)
-            new_root.insert_non_full(key)
             self.root = new_root
-        else:
-            self.root.insert_non_full(key)
+        
+        self.root.insert_non_full(key)
 
     def delete(self, key: int) -> None:
         """
